@@ -134,6 +134,8 @@ public final class SlideLeafViewController: UIViewController {
 
     public override func viewDidLoad() {
         super.viewDidLoad()
+		
+		self.view.backgroundColor = .clear
         
 		if delegate == nil {
             // tapImageDetailView disabled
@@ -192,13 +194,11 @@ public final class SlideLeafViewController: UIViewController {
             originPanImageViewCenterY = cell.imageView.center.y
             serrataTransition.interactor.hasStarted = true
 
-//			self.dismiss(animated: true) {
-//
-//            }
-			
-			if self.isDecideDissmiss {
-				self.close()
-			}
+			self.dismiss(animated: true) {
+				if self.isDecideDissmiss {
+					self.delegate?.slideLeafViewControllerDismissed?(slideLeaf: self.slideLeafs[self.pageIndex], pageIndex: self.pageIndex)
+				}
+            }
 
         case .changed:
             let translation = sender.translation(in: view)
