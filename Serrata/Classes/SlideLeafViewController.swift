@@ -134,6 +134,8 @@ public final class SlideLeafViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .clear
+		
+		self.modalPresentationStyle = .fullScreen
 
         if delegate == nil {
             // tapImageDetailView disabled
