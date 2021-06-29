@@ -41,7 +41,7 @@ public final class SlideLeafViewController: UIViewController {
 
     @IBOutlet weak private var collectionView: UICollectionView! {
         didSet {
-            collectionView.register(UINib(nibName: "SlideLeafCell", bundle: Bundle(for: SlideLeaf.self)), forCellWithReuseIdentifier: "SlideLeafCell")
+			collectionView.register(UINib(nibName: "SlideLeafCell", bundle: Bundle.module), forCellWithReuseIdentifier: "SlideLeafCell")
             collectionView.isPagingEnabled = true
             collectionView.backgroundColor = .clear
             collectionView.showsHorizontalScrollIndicator = false
@@ -122,7 +122,7 @@ public final class SlideLeafViewController: UIViewController {
     ///   - fromImageView: ImageView of the origin of transition. In the case of nil, CrossDissolve.
     /// - Returns: Instance of SlideLeafViewController.
     public class func make(leafs: [SlideLeaf], startIndex: Int = 0, fromImageView: UIImageView? = nil) -> SlideLeafViewController {
-        let viewController = UIStoryboard(name: "SlideLeafViewController", bundle: Bundle(for: SlideLeafViewController.self))
+        let viewController = UIStoryboard(name: "SlideLeafViewController", bundle: Bundle.module)
             .instantiateViewController(withIdentifier: "SlideLeafViewController") as! SlideLeafViewController
         viewController.transitioningDelegate = viewController.serrataTransition
         viewController.slideLeafs = leafs
