@@ -19,7 +19,7 @@ private enum SlideLeafConst {
     @objc optional func tapImageDetailView(slideLeaf: SlideLeaf, pageIndex: Int)
     @objc optional func longPressImageView(slideLeafViewController: SlideLeafViewController, slideLeaf: SlideLeaf, pageIndex: Int)
     @objc optional func slideLeafViewControllerDismissed(slideLeaf: SlideLeaf, pageIndex: Int)
-	@objc func slideLeafControllerDismiss(slideLeaf: SlideLeaf, pageIndex: Int)
+	@objc func slideLeafControllerDismiss(viewController: SlideLeafViewController, slideLeaf: SlideLeaf, pageIndex: Int)
 }
 
 public final class SlideLeafViewController: UIViewController {
@@ -193,7 +193,7 @@ public final class SlideLeafViewController: UIViewController {
             serrataTransition.interactor.hasStarted = true
 
 //			self.dismiss(animated: true) {
-//                
+//
 //            }
 			
 			if self.isDecideDissmiss {
@@ -330,7 +330,7 @@ extension SlideLeafViewController: ImageDetailViewDelegate {
 
 extension SlideLeafViewController {
 	func close() {
-		self.delegate?.slideLeafControllerDismiss(slideLeaf: self.slideLeafs[self.pageIndex], pageIndex: self.pageIndex)
+		self.delegate?.slideLeafControllerDismiss(viewController: self, slideLeaf: self.slideLeafs[self.pageIndex], pageIndex: self.pageIndex)
 	}
 }
 
