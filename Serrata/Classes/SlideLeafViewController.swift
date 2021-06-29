@@ -194,7 +194,7 @@ public final class SlideLeafViewController: UIViewController {
             originPanImageViewCenterY = cell.imageView.center.y
             serrataTransition.interactor.hasStarted = true
 
-            dismiss(animated: true) {
+			self.presentingViewController?.dismiss(animated: true) {
                 if self.isDecideDissmiss {
                     let leaf = self.slideLeafs[self.pageIndex]
                     self.delegate?.slideLeafViewControllerDismissed?(slideLeaf: leaf, pageIndex: self.pageIndex)
@@ -256,7 +256,7 @@ public final class SlideLeafViewController: UIViewController {
 
     private func setImageDetailText(_ pageIndex: Int) {
         if slideLeafs.isEmpty {
-            dismiss(animated: true, completion: nil)
+			self.presentingViewController?.dismiss(animated: true, completion: nil)
         } else {
             let title = slideLeafs[pageIndex].title
             let caption = slideLeafs[pageIndex].caption
@@ -318,14 +318,14 @@ extension SlideLeafViewController: SlideLeafCellDelegate {
 extension SlideLeafViewController: ImageDetailViewDelegate {
 
     public func tapCloseButton() {
-        dismiss(animated: true) {
+		self.presentingViewController?.dismiss(animated: true) {
             let leaf = self.slideLeafs[self.pageIndex]
             self.delegate?.slideLeafViewControllerDismissed?(slideLeaf: leaf, pageIndex: self.pageIndex)
         }
     }
 
     public func tapDetailView() {
-        dismiss(animated: true) {
+		self.presentingViewController?.dismiss(animated: true) {
             let leaf = self.slideLeafs[self.pageIndex]
             self.delegate?.tapImageDetailView?(slideLeaf: leaf, pageIndex: self.pageIndex)
         }
