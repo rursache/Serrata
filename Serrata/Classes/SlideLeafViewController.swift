@@ -19,6 +19,7 @@ private enum SlideLeafConst {
     @objc optional func tapImageDetailView(slideLeaf: SlideLeaf, pageIndex: Int)
     @objc optional func longPressImageView(slideLeafViewController: SlideLeafViewController, slideLeaf: SlideLeaf, pageIndex: Int)
     @objc optional func slideLeafViewControllerDismissed(slideLeaf: SlideLeaf, pageIndex: Int)
+	@objc func slideLeafControllerDismiss(slideLeaf: SlideLeaf, pageIndex: Int)
 }
 
 public final class SlideLeafViewController: UIViewController {
@@ -191,12 +192,13 @@ public final class SlideLeafViewController: UIViewController {
             originPanImageViewCenterY = cell.imageView.center.y
             serrataTransition.interactor.hasStarted = true
 
-			self.dismiss(animated: true) {
-                if self.isDecideDissmiss {
-                    let leaf = self.slideLeafs[self.pageIndex]
-                    self.delegate?.slideLeafViewControllerDismissed?(slideLeaf: leaf, pageIndex: self.pageIndex)
-                }
-            }
+//			self.dismiss(animated: true) {
+//                
+//            }
+			
+			if self.isDecideDissmiss {
+				self.close()
+			}
 
         case .changed:
             let translation = sender.translation(in: view)
@@ -253,7 +255,7 @@ public final class SlideLeafViewController: UIViewController {
 
     private func setImageDetailText(_ pageIndex: Int) {
         if slideLeafs.isEmpty {
-			self.dismiss(animated: true, completion: nil)
+			self.close()
         } else {
             let title = slideLeafs[pageIndex].title
             let caption = slideLeafs[pageIndex].caption
@@ -315,10 +317,7 @@ extension SlideLeafViewController: SlideLeafCellDelegate {
 extension SlideLeafViewController: ImageDetailViewDelegate {
 
     public func tapCloseButton() {
-		self.dismiss(animated: true) {
-            let leaf = self.slideLeafs[self.pageIndex]
-            self.delegate?.slideLeafViewControllerDismissed?(slideLeaf: leaf, pageIndex: self.pageIndex)
-        }
+		self.close()
     }
 
     public func tapDetailView() {
@@ -327,6 +326,12 @@ extension SlideLeafViewController: ImageDetailViewDelegate {
             self.delegate?.tapImageDetailView?(slideLeaf: leaf, pageIndex: self.pageIndex)
         }
     }
+}
+
+extension SlideLeafViewController {
+	func close() {
+		self.delegate?.slideLeafControllerDismiss(slideLeaf: self.slideLeafs[self.pageIndex], pageIndex: self.pageIndex)
+	}
 }
 
 extension SlideLeafViewController: UICollectionViewDelegate {
