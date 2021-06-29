@@ -9,7 +9,7 @@
 import UIKit
 import Kingfisher
 
-public protocol SlideLeafCellDelegate: class {
+public protocol SlideLeafCellDelegate: AnyObject {
     func slideLeafScrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?)
     func slideLeafScrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat)
     func slideLeafScrollViewDidZoom(_ scrolView: UIScrollView)
@@ -31,7 +31,7 @@ public final class SlideLeafCell: UICollectionViewCell {
 
     @IBOutlet weak private var activityIndicatorView: UIActivityIndicatorView! {
         didSet {
-            activityIndicatorView.activityIndicatorViewStyle = .whiteLarge
+			activityIndicatorView.style = .whiteLarge
             activityIndicatorView.isHidden = true
         }
     }
@@ -66,13 +66,17 @@ public final class SlideLeafCell: UICollectionViewCell {
         } else if let url = slideLeaf.imageUrlString {
             activityIndicatorView.startAnimating()
             activityIndicatorView.isHidden = false
-
-            imageView.kf.setImage(with: URL(string: url)) { [weak self] image, _, _, _ in
-                guard let me = self, let image = image else { return }
-                me.activityIndicatorView.isHidden = true
-                me.activityIndicatorView.stopAnimating()
-                me.setImage(image)
-            }
+			
+			imageView.kf.setImage(with: URL(string: url)) { [weak self] result in
+				switch result {
+				case .success(let value):
+					self?.activityIndicatorView.isHidden = true
+					self?.activityIndicatorView.stopAnimating()
+					self?.setImage(value.image)
+				case .failure(let error):
+					print(error.localizedDescription)
+				}
+			}
         }
     }
 

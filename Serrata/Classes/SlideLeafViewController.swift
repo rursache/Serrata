@@ -15,7 +15,7 @@ private enum SlideLeafConst {
     static let imageTransitionDuration = 0.3
 }
 
-@objc public protocol SlideLeafViewControllerDelegate: class {
+@objc public protocol SlideLeafViewControllerDelegate: AnyObject {
     @objc optional func tapImageDetailView(slideLeaf: SlideLeaf, pageIndex: Int)
     @objc optional func longPressImageView(slideLeafViewController: SlideLeafViewController, slideLeaf: SlideLeaf, pageIndex: Int)
     @objc optional func slideLeafViewControllerDismissed(slideLeaf: SlideLeaf, pageIndex: Int)
@@ -26,8 +26,8 @@ public final class SlideLeafViewController: UIViewController {
     public override var prefersStatusBarHidden: Bool {
         return true
     }
-
-    public override func prefersHomeIndicatorAutoHidden() -> Bool {
+	
+	public func prefersHomeIndicatorAutoHidden() -> Bool {
         return isPrefersHomeIndicatorAutoHidden
     }
 
@@ -207,7 +207,7 @@ public final class SlideLeafViewController: UIViewController {
 
             let vertivalMovement = originPanImageViewCenterY - panImageViewCenterY
             /// 0.0 <-> 1.0
-            let verticalPercent = fabs(vertivalMovement / view.frame.height)
+			let verticalPercent = abs(vertivalMovement / view.frame.height)
             serrataTransition.interactor.update(verticalPercent)
             rotationBlackImageView.alpha = 1 - verticalPercent
 
@@ -216,7 +216,7 @@ public final class SlideLeafViewController: UIViewController {
             serrataTransition.interactor.hasStarted = false
 
             let velocityY = sender.velocity(in: view).y
-            if fabs(velocityY) > SlideLeafConst.maxSwipeCancelVelovityY {
+			if abs(velocityY) > SlideLeafConst.maxSwipeCancelVelovityY {
                 view.isUserInteractionEnabled = false
                 isDecideDissmiss = true
 

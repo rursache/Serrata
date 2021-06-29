@@ -18,7 +18,7 @@ private enum ImageDetailConst {
     static let fadeOutDetailViewBottom: CGFloat = -20
 }
 
-public protocol ImageDetailViewDelegate: class {
+public protocol ImageDetailViewDelegate: AnyObject {
     func tapCloseButton()
     func tapDetailView()
 }
