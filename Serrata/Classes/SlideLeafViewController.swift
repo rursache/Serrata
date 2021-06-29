@@ -129,6 +129,7 @@ public final class SlideLeafViewController: UIViewController {
         viewController.slideLeafs = leafs
         viewController.pageIndex = (leafs.count - 1) >= startIndex ? startIndex : 0
         viewController.serrataTransition.setFromImageView(fromImageView)
+		viewController.modalPresentationStyle = .fullScreen
         return viewController
     }
 
