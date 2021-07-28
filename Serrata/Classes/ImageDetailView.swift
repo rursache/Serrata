@@ -79,7 +79,12 @@ public final class ImageDetailView: UIView {
         }
     }
 	
-	@IBOutlet weak private var avatarImageView: UIImageView!
+	@IBOutlet weak private var avatarImageView: UIImageView! {
+		didSet {
+			avatarImageView.layer.cornerRadius = avatarImageView.frame.width/2
+			avatarImageView.clipsToBounds = true
+		}
+	}
 
     public override func awakeFromNib() {
         super.awakeFromNib()
