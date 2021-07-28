@@ -260,7 +260,8 @@ public final class SlideLeafViewController: UIViewController {
         } else {
             let title = slideLeafs[pageIndex].title
             let caption = slideLeafs[pageIndex].caption
-            imageDetailView.setDetail(title, caption)
+			let avatarUrl = slideLeafs[pageIndex].avatarUrlString
+            imageDetailView.setDetail(title, caption, avatarUrl)
         }
     }
 

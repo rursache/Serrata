@@ -116,7 +116,7 @@ public final class ImageDetailView: UIView {
 			}
 			avatarImageView.kf.setImage(with: avatarUrl, placeholder: placeholder)
 		} else {
-			avatarImageView.isHidden = true
+			(avatarImageView.superview as? UIStackView)?.removeArrangedSubview(avatarImageView)
 		}
 		
         if title != "" && caption != "" {
