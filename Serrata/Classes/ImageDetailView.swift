@@ -64,7 +64,7 @@ public final class ImageDetailView: UIView {
 
     @IBOutlet weak private var titleLabel: UILabel! {
         didSet {
-			titleLabel.textColor = UIColor.white.withAlphaComponent(0.75)
+			titleLabel.textColor = .white
             titleLabel.font = UIFont.boldSystemFont(ofSize: 17)
             titleLabel.textAlignment = .left
         }
@@ -72,7 +72,7 @@ public final class ImageDetailView: UIView {
 
     @IBOutlet weak private var captionLabel: UILabel! {
         didSet {
-            captionLabel.textColor = .white
+            captionLabel.textColor = UIColor.white.withAlphaComponent(0.75)
             captionLabel.font = UIFont.systemFont(ofSize: 15)
             captionLabel.textAlignment = .left
             captionLabel.numberOfLines = 0
