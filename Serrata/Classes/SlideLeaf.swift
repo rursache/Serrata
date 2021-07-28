@@ -15,6 +15,8 @@ public final class SlideLeaf: NSObject {
 
     public var title: String
     public var caption: String
+	
+	public var avatarUrlString: String?
 
 
     /// If either title and caption is empty, detailView is not displayed.
@@ -40,4 +42,11 @@ public final class SlideLeaf: NSObject {
         self.title = title
         self.caption = caption
     }
+	
+	public init(imageUrlString: String?, title: String = "", caption: String = "", avatarUrlString: String?) {
+		self.imageUrlString = imageUrlString
+		self.title = title
+		self.caption = caption
+		self.avatarUrlString = avatarUrlString
+	}
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 private enum ImageDetailConst {
     static let maxAlpha: CGFloat = 0.4
@@ -77,6 +78,8 @@ public final class ImageDetailView: UIView {
             captionLabel.numberOfLines = 0
         }
     }
+	
+	@IBOutlet weak private var avatarImageView: UIImageView!
 
     public override func awakeFromNib() {
         super.awakeFromNib()
@@ -103,7 +106,19 @@ public final class ImageDetailView: UIView {
         detailButton.isEnabled = false
     }
 
-    public func setDetail(_ title: String, _ caption: String) {
+	public func setDetail(_ title: String, _ caption: String, _ avatarUrl: String? = nil) {
+		if let avatarUrlString = avatarUrl, let avatarUrl = URL(string: avatarUrlString) {
+			var placeholder: UIImage!
+			if #available(iOS 13.0, *) {
+				placeholder = UIImage(named: "default_avatar", in: Bundle.module, with: nil)
+			} else {
+				placeholder = UIImage(named: "default_avatar", in: Bundle.module, compatibleWith: nil)
+			}
+			avatarImageView.kf.setImage(with: avatarUrl, placeholder: placeholder)
+		} else {
+			avatarImageView.isHidden = true
+		}
+		
         if title != "" && caption != "" {
             titleLabel.text = title
             captionLabel.text = caption
