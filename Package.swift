@@ -11,18 +11,13 @@ let package = Package(
             name: "Serrata",
             targets: ["Serrata"]),
     ],
-	dependencies: [
-		.package(
-				url: "https://github.com/onevcat/Kingfisher.git",
-				from: "6.3.0"
-			)
-	],
+    dependencies: [
+	.package(url: "https://github.com/onevcat/Kingfisher.git", from: "6.3.0")
+    ],
     targets: [
         .target(
-            name: "Serrata",
-			dependencies: ["Kingfisher"],
-            path: "Serrata",
-			exclude: ["Info.plist", "Serrata.h"]
+            name: "Serrata", dependencies: ["Kingfisher"],
+            path: "Serrata", exclude: ["Info.plist", "Serrata.h"]
         )
     ],
     swiftLanguageVersions: [.v5]
