@@ -12,7 +12,7 @@ let package = Package(
             targets: ["Serrata"]),
     ],
     dependencies: [
-	.package(url: "https://github.com/onevcat/Kingfisher.git", from: "6.3.0")
+	.package(url: "https://github.com/onevcat/Kingfisher.git", .branch("master"))
     ],
     targets: [
         .target(
